@@ -1,25 +1,20 @@
-package testingpractice
 
-/**
- * Created by jefersson on 18/10/15.
- */
 import spock.lang.Specification
-class ConstraintUnitSpec extends Specification {
 
+abstract class ConstraintUnitUsuarioSpec extends Specification {
     String getLongString(Integer length) {
-        'a' * 56
-    }
-
-    String getSex(Boolean valid) {
-        valid ? "F" : "W"
+        'a' * length
     }
 
     String getAge(Boolean valid) {
         valid ? 21 : 5
     }
 
-    //Put constraints generator here.
-    void validateConstraints(obj, field, error){
+    String getSex(Boolean valid) {
+        valid ? "F" : "W"
+    }
+
+    void validateConstraints(obj, field, error) {
         def validated = obj.validate()
         if (error && error != 'valid') {
             assert !validated

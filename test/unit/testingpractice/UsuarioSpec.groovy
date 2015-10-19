@@ -10,11 +10,23 @@ import spock.lang.Specification
 class UsuarioSpec extends Specification {
 
     def setup() {
+        mockForConstraintsTests(Usuario, [new Usuario(cedula:)])
     }
 
     def cleanup() {
     }
 
-    void "test something"() {
+    @Unroll("prueba todas las contraints de usuario #field es #error")
+    void "prueba los constraints de usuario"() {
+        when:
+        def obj = new Usuario("$field": val)
+
+        then:
+        validateContraints(obj, field, error)
+
+        where:
+        error       | field         | val
+        'size'      | 'nombre'      | getLongString(56)
+        'nullable'  | 'nombre'      | null
     }
 }
