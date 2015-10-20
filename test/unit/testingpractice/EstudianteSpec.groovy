@@ -9,23 +9,24 @@ import spock.lang.Specification
 @TestFor(Estudiante)
 class EstudianteSpec extends Specification {
 
-   def setup() {
-        mockForConstraintsTests(Estudiante, [new Estudiante(semestre:22,codigo:1234)])
+     def setup() {
+        mockDomain(Estudiante)
     }
 
     def cleanup() {
     }
 
-    void "prueba los constraints de Estudiante"() {
+    def "Se prueba el numero de semestre"(){
         when:
-        def obj = new Estudiante("$field": val)
+        def obj = new Estudiante(semestre: 24)
+        obj.semestre = semestre
+        obj.validate()
 
         then:
-        validateContraints(obj, field, error)
+        obj.errors.hasFieldErrors("semestre") == !valid
 
         where:
-        error       | field         | val
-        'max'       | 'semestre'    | 22
-        'nullable'  | 'codigo'      | null
+        semestre | valid
+         24      | false
     }
 }
