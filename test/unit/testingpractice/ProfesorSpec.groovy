@@ -10,11 +10,23 @@ import spock.lang.Specification
 class ProfesorSpec extends ConstraintUnitSpec {
 
     def setup() {
+		mockForConstraintsTest(Profesor, [new Profesor(oficina: 1)])
     }
 
     def cleanup() {
     }
 
-    void "test something"() {
+    def "test Profesor all constraints"() {
+		when:
+		def obj = new Profesor("$field", val)
+
+		then:
+		validateConstraints(obj, field, error)
+
+		where:
+		error 	| field		| val
+		'min'	| oficina	| 0
+		'max'	| oficina	| 51
+		'unique'| oficina	| 1 
     }
 }
