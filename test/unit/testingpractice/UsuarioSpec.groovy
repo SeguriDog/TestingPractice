@@ -10,7 +10,7 @@ import spock.lang.Specification
 class UsuarioSpec extends Specification {
 
     def setup() {
-        mockForConstraintsTests(Usuario, [new Usuario(cedula:'12345678')])
+        mockForConstraintsTests(Usuario, [new Usuario(cedula:12345678)])
     }
 
     def cleanup() {
@@ -27,6 +27,12 @@ class UsuarioSpec extends Specification {
         where:
         error       | field         | val
         'size'      | 'nombre'      | getLongString(56)
+        'size'      | 'nombre'      | getLongString(1)
         'nullable'  | 'nombre'      | null
+        'size'      | 'apellido'    | getLongString(70)
+        'size'      | 'apellido'    | getLongString(2)
+        'nullable'  | 'apellido'    | null
+        'range'     | 'edad'        | getAge(false)
+        'validator' | 'genero'      | getSex(false)
     }
 }

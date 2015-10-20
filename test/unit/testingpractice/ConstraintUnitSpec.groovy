@@ -7,7 +7,7 @@ import spock.lang.Specification
 class ConstraintUnitSpec extends Specification {
 
     String getLongString(Integer length) {
-        'a' * 56
+        'a' * length
     }
 
     String getSex(Boolean valid) {
