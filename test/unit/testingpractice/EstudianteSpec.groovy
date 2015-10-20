@@ -28,5 +28,23 @@ class EstudianteSpec extends Specification {
         where:
         semestre | valid
          24      | false
+          4      | true
     }
+    
+     def "Se prueba el codigo"(){
+        when:
+        def objc = new Estudiante(codigo: 1234)
+        objc.codigo = codigo
+        objc.validate()
+
+        then:
+        objc.hasErrors() == !valid
+
+        where:
+        codigo | valid
+         null  | false
+         123   | true
+    }
+    
+    
 }
