@@ -8,4 +8,15 @@ import spock.lang.*
 @Mock(Usuario)
 class UsuarioControllerSpec extends Specification {
 
+	def "test para numeroDeInstacias"() {
+		when:
+		Usuario u1 = new usuario(nombre:'Carpoforo', apellido:'Guacaneme', edad:27, genero:'M', 6475834)
+		Usuario u2 = new usuario(nombre:'Bernabe', apellido:'Piraquive', edad:26, genero:'M', 6475857856)
+		u1.save()
+		u2.save()
+		
+		then:
+		controller.numeroDeInstancias() == 2
+	}
+
 }
